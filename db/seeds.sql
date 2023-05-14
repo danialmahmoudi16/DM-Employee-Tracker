@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS=0;
+
 INSERT INTO department (department_name)
 VALUES  ("Accounting"),
         ("Audit"),
@@ -16,16 +18,16 @@ VALUES  ("Senior Accountant", 85000, 1),
         ("Finance Director", 200000, 9),
         ("Tax Director", 160000, 10);
 
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES  ("Clive", "Tyldesley", 9),
-        ("Alan", "Smith", 10),
-        ("Josh", "Barker", 1),
-        ("Celine", "Scott", 2),
-        ("Stephanie", "Maguire", 4),
-        ("Steve", "Macanally", 5),
-        ("David", "Robinson", 3),
-        ("Katie", "McCabe", 6),
-        ("Stina", "Goldsmith", 7),
-        ("Peter", "Drury", 8);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES  ("Clive", "Tyldesley", 9, NULL),
+        ("Alan", "Smith", 10, 9),
+        ("Josh", "Barker", 1, 9),
+        ("Celine", "Scott", 2, 1),
+        ("Stephanie", "Maguire", 4, 9),
+        ("Steve", "Macanally", 5, 9),
+        ("David", "Robinson", 3, 1),
+        ("Katie", "McCabe", 6, 9),
+        ("Stina", "Goldsmith", 7, 6),
+        ("Peter", "Drury", 8, 6);
 
 
