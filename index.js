@@ -159,9 +159,61 @@ function addEmployee() {
                                 console.log(`${firstName} ${lastName} has been added`)
                                 choice()
                             }
-                })
-            })
+                        })
+                    })
         })
     })
 }
+
+const newRole = function () {
+    var roles = {};
+    db.query(`SELECT * FROM role`, (err, results) => {
+        if (err) {
+            console.log(err)
+            return
+        }
+        const roles = results.map((role) => ({
+            name: `${role.role_title}`,
+            value: role,
+        }))
+    })
+
+    db.query(`SELECT * FROM employee`, (err, results) => {
+        if (err) {
+            console.log(err)
+            return
+        }
+        const employees = results.map((employee) => ({
+            name: `${remployee.first_name} ${employee.lastname}`,
+            value: employee,
+        }))
+
+        inquirer.prompt([
+            {
+                type: 'list',
+                message: 'Which employees role would you like to update?',
+                name: 'employee',
+                choices: employees
+            },
+            {
+                type: 'list',
+                message: 'Which role would you like to appropriate to the selected employee?',
+                name: 'employee',
+                choices: roles
+            },
+        ])
+            .then((resp) => {
+                const selectedRole = resp.role_id
+
+                db.query(`UPDATE employee SET role_id = ${selectedRole.role_id} ${employee.last_Name}`, (err, results) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log('Role has been updated');
+                    choice();
+                });
+            })
+    })
+}
+
 
