@@ -270,15 +270,20 @@ function addDepartment() {
         }
     ])
         .then((resp) => {
-            db.query(`INSERT INTO department (department_name) VALUES ("${resp.departmentName})`, function (err, results) {
+            db.query(`INSERT INTO department (department_name) VALUES ('${resp.departmentName}')`, 
+            function (err, results) {
                 if (err) {
                     console.log(err)
-                }
+                } else {
                 console.log(`Added ${resp.departmentName} to the database`)
                 choice();
+            }
             })
         }
         )
 }
+
+
+
 
 choice();
