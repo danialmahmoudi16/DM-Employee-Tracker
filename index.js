@@ -225,7 +225,7 @@ function addRole() {
         }
         const department = results.map((department) => ({
             name: `${department.department_name}`,
-            value: department
+            value: department.id,
         }));
 
         inquirer.prompt([
@@ -243,13 +243,20 @@ function addRole() {
                 type: 'list',
                 message: 'which department does the role belong to?',
                 name: 'departmentID',
-                choices: department
+                choices: department,
             }
         ])
             .then((resp) => {
-                db.query(`INSERT INTO role (title, salary, department_id) VALUES('${resp.roleName}', ${resp.roleSalary}, ${resp.departmentID.department_id})`)
-                console.log(`Added ${resp.roleName} to the database`);
-                choice();
+                db.query(`INSERT INTO role (title, salary, department_id) VALUES('${resp.roleName}', ${resp.roleSalary}, ${resp.departmentID})`,
+                    function (err, results) {
+                        if (err) {
+                            console.log(err)
+
+                        }
+                        console.log(`Added ${resp.roleName} to the database`);
+                        choice();
+                    }
+                )
             })
     })
 }
